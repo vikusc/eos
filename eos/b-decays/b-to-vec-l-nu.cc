@@ -53,7 +53,11 @@ namespace eos
 
         Parameters parameters;
 
+        SwitchOption opt_U;
+
         SwitchOption opt_q;
+
+        SwitchOption opt_I;
 
         UsedParameter hbar;
 
@@ -69,6 +73,8 @@ namespace eos
 
         UsedParameter m_V;
 
+        const double isospin_factor;
+
         bool cp_conjugate;
 
         UsedParameter mu;
@@ -81,37 +87,75 @@ namespace eos
 
         IntermediateResult intermediate_result;
 
+        // { U, q, I } -> { process, m_B, m_V, c_I }
+        static const std::map<std::tuple<char, char, std::string>, std::tuple<std::string, std::string, std::string, double>> process_map;
+
         inline std::string _process() const
         {
-            switch (opt_q.value()[0])
-            {
-                case 'd':
-                case 'u':
-                    return std::string("B->D^*");
-                    break;
+            const char U = opt_U.value()[0];
+            const char q = opt_q.value()[0];
+            const std::string I = opt_I.value();
+            const auto p = process_map.find(std::make_tuple(U, q, I));
 
-                case 's':
-                    return std::string("B_s->D_s^*");
-                    break;
+            if (p == process_map.end())
+                throw InternalError("Unsupported combination of U=" + stringify(U) + ", q=" + q + ", I=" + I);
 
-                default:
-                    throw InternalError("Should never reach this part, either!");
-            }
+            return std::get<0>(p->second);
+        }
 
-            return "";
+        inline std::string _m_B() const
+        {
+            const char U = opt_U.value()[0];
+            const char q = opt_q.value()[0];
+            const std::string I = opt_I.value();
+            const auto p = process_map.find(std::make_tuple(U, q, I));
+
+            if (p == process_map.end())
+                throw InternalError("Unsupported combination of U=" + stringify(U) + ", q=" + q + ", I=" + I);
+
+            return std::get<1>(p->second);
+        }
+
+        inline std::string _m_V() const
+        {
+            const char U = opt_U.value()[0];
+            const char q = opt_q.value()[0];
+            const std::string I = opt_I.value();
+            const auto p = process_map.find(std::make_tuple(U, q, I));
+
+            if (p == process_map.end())
+                throw InternalError("Unsupported combination of U=" + stringify(U) + ", q=" + q + ", I=" + I);
+
+            return std::get<2>(p->second);
+        }
+
+        inline double _isospin_factor() const
+        {
+            const char U = opt_U.value()[0];
+            const char q = opt_q.value()[0];
+            const std::string I = opt_I.value();
+            const auto p = process_map.find(std::make_tuple(U, q, I));
+
+            if (p == process_map.end())
+                throw InternalError("Unsupported combination of U=" + stringify(U) + ", q=" + q + ", I=" + I);
+
+            return std::get<3>(p->second);
         }
 
         Implementation(const Parameters & p, const Options & o, ParameterUser & u) :
             model(Model::make(o.get("model", "SM"), p, o)),
             parameters(p),
+            opt_U(o, "U", { "c", "u" }),
             opt_q(o, "q", { "u", "d", "s" }, "d"),
+            opt_I(o, "I", { "1", "0", "1/2" }),
             hbar(p["QM::hbar"], u),
             tau_B(p["life_time::B_" + opt_q.value()], u),
             g_fermi(p["WET::G_Fermi"], u),
             opt_l(o, "l", {"e", "mu", "tau"}, "mu"),
             m_l(p["mass::" + opt_l.value()], u),
-            m_B(p["mass::B_" + opt_q.value()], u),
-            m_V(p["mass::D_" + opt_q.value() + "^*"], u),
+            m_B(p["mass::" + _m_B()], u),
+            m_V(p["mass::" + _m_V()], u),
+            isospin_factor(_isospin_factor()),
             cp_conjugate(destringify<bool>(o.get("cp-conjugate", "false"))),
             mu(p["cb" + opt_l.value() + "nu" + opt_l.value() + "::mu"], u),
             opt_int_points(o, "integration-points", {"256", "4096"}, "256"),
@@ -124,7 +168,6 @@ namespace eos
 
             u.uses(*form_factors);
             u.uses(*model);
-
         }
 
         // normalization cf. [DSD2014] eq. (7), p. 5
@@ -245,6 +288,18 @@ namespace eos
 
             return integrated_pdf_q2(q2_min, q2_max) * (q2_max - q2_min) / (w_max - w_min);
         }
+    };
+
+    const std::map<std::tuple<char, char, std::string>, std::tuple<std::string, std::string, std::string, double>>
+    Implementation<BToVectorLeptonNeutrino>::Implementation::process_map
+    {
+        { { 'c', 'u', "1/2" }, { "B->D^*",     "B_u", "D_u^*", 1.0                  } },
+        { { 'c', 'd', "1/2" }, { "B->D^*",     "B_d", "D_d^*", 1.0                  } },
+        { { 'c', 's', "0"   }, { "B_s->D_s^*", "B_s", "D_s^*", 1.0                  } },
+        { { 'u', 'u', "1"   }, { "B->rho",     "B_u", "rho^0", 1.0 / std::sqrt(2.0) } },
+        { { 'u', 'u', "0"   }, { "B->omega",   "B_u", "rho^0", 1.0 / std::sqrt(2.0) } },
+        { { 'u', 'd', "1"   }, { "B->rho",     "B_d", "rho^+", 1.0                  } },
+        { { 'u', 's', "1"   }, { "B_s->K^*",   "B_s", "K_u^*", 1.0                  } },
     };
 
     BToVectorLeptonNeutrino::BToVectorLeptonNeutrino(const Parameters & p, const Options & o) :
