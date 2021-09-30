@@ -698,13 +698,10 @@ namespace eos
     }
 
     double
-    BToVectorLeptonNeutrino::integrated_S3(const double & q2_min, const double & q2_max) const
+    BToVectorLeptonNeutrino::integrated_S3(const IntermediateResult * ir) const
     {
-        Save<bool> save(_imp->cp_conjugate, false);
-
-        auto   o = _imp->integrated_angular_observables(q2_min, q2_max);
-        _imp->cp_conjugate = true;
-        auto   o_c = _imp->integrated_angular_observables(q2_min, q2_max);
+        const auto & o   = ir->ao;
+        const auto & o_c = ir->ao_bar;
 
         return 3.0 / 4.0 * (o.vv4T() + o_c.vv4T()) / (o.normalized_decay_width() + o_c.normalized_decay_width());
     }
