@@ -42,9 +42,13 @@ matplotlib.rcParams['ytick.direction'] = 'out'
 
 matplotlib.rcParams['text.usetex'] = True
 
-matplotlib.rcParams['pgf.preamble'] = r'''
-\usepackage{amsmath}
-\usepackage{xcolor}
-'''
+matplotlib.rcParams['pgf.preamble'] = (
+        r'\usepackage{amsmath}'
+        r'\usepackage{xcolor}'
+        # The line below is a workaround for a compatibility issue between
+        # python, matplotlib and latex. Define a dummy implementation if the
+        # command is not already defined.
+        r'\providecommand{\mathdefault}[1][]{}'
+        )
 
 matplotlib.rcParams['errorbar.capsize'] = 5
