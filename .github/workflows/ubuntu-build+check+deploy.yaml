@@ -180,7 +180,7 @@ jobs:
             - name: Run examples
               shell: bash
               run: |
-                pip3 install jupyter nbconvert
+                pip3 install --user --upgrade jupyter nbconvert h5py matplotlib numpy pypmc pyyaml scipy
                 pushd _build
                 make install
                 popd
