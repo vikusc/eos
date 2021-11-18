@@ -515,6 +515,17 @@ groups:
           max:     +0.24
           latex:    '$(\delta^{\pi})^2(1\,\GeV)$'
           comments: ' // GeV^2, cf. [DKMMO2008]'
+      # Kaon LCDA parameters
+      'K::a1@1GeV' :
+          central: -0.07
+          min:     -0.10
+          max:     -0.04
+          latex:    '$a^{\pi}_1(1\,\GeV)$'
+      'K::a2@1GeV' :
+          central: +0.24
+          min:     +0.16
+          max:     +0.32
+          latex:    '$a^{\pi}_2(1\,\GeV)$'
       # K^* LCDA parameters
       'K^*::a_1_para@1GeV' :
           central: +0.06
