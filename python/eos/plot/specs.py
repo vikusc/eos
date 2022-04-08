@@ -116,7 +116,7 @@ class VariableSpec(BaseSpec):
 
             except RuntimeError:
                 raise ValueError(f"Value of 'variable' for observable '{obs_name}'"
-                                 f" is neither a valid kinematic variable nor parameter: {value}")
+                                 f" is neither a valid kinematic variable nor parameter: '{value}'")
 
     @property
     def type(self):
@@ -318,6 +318,29 @@ class RangeSpecTests(unittest.TestCase):
         s = RangeSpec(name = 'range')
         with self.assertRaises(ValueError):
             s.validate_set([1.0, 2.0, 3.0])
+
+
+class ParameterFileSpec(BaseSpec):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def validate_set(self, value):
+        "``str`` -- the path of a hdf5 file containing parameters"
+        if not isinstance(value, str):
+            raise ValueError(f"{self.name} must be a string")
+
+class ParameterFileSpecTests(unittest.TestCase):
+
+    def test_valid(self):
+        s = ParameterFileSpec(name = 'parameters-from-file')
+        s.validate_set('some/path.file')
+
+    def test_valid(self):
+        s = ParameterFileSpec(name = 'parameters-from-file')
+        with self.assertRaises(ValueError):
+            s.validate_set(3.1415)
+
 
 import logging
 logger = logging.getLogger(__name__)
