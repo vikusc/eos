@@ -135,6 +135,43 @@ namespace eos
                 bool use_nlo, bool ccbar_resonance, const complex<double> & lambda_hat_u,
                 const WilsonCoefficients<BToS> & wc);
     };
+
+    namespace agv_2019a
+    {
+        struct CharmLoopsParameters
+        {
+            double muhat;
+
+            complex<double> s_eps;
+            complex<double> z_eps;
+
+            // only quark mass dependend variables, cf. [AGV:2019A] p. 15 eq. (3.20)
+            complex<double> x_a;
+            complex<double> x_b;
+            complex<double> x_c;
+            complex<double> x_d;
+            complex<double> x_e;
+
+            // q^2 and quark mass dependend variables, cf. [AGV:2019A] p. 15 eq. (3.20)
+            complex<double> y_a;
+            complex<double> y_b;
+            complex<double> y_c;
+            complex<double> y_d;
+            complex<double> y_e;
+
+            /*!
+            * Input parameters
+            *
+            * @param muhat              renormalization scale divided by bottom quark mass m_b
+            * @param s                  dilepton invariant mass divided by squared bottom quark mass m_b
+            * @param z                  squared charm quark mass divided by squared bottom quark mass
+            * @param feynepsilonhat     epsilon prescription divided by bottom quark mass m_b
+            *
+            */
+
+            CharmLoopsParameters(const double & muhat, const complex<double> & s, const double & z, const double & feynepsilonhat);
+        };
+    }
 }
 
 #endif
