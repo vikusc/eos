@@ -142,8 +142,8 @@ namespace eos
         {
             double muhat;
 
-            complex<double> s_eps;
-            complex<double> z_eps;
+            complex<double> s_eps; // dilepton invariant mass divided by bottom quark mass m_b^2 including the epsilon prescription: q^2 / (m_b^2 - i * eps)
+            complex<double> z_eps; // charm quark mass divided by bottom quark mass, squared, including the epsilon prescription: (m_c^2 - i * epsilon) / (m_b^2 - i * eps)
 
             // only quark mass dependend variables, cf. [AGV:2019A] p. 15 eq. (3.20)
             complex<double> x_a;
@@ -165,12 +165,37 @@ namespace eos
             * @param muhat              renormalization scale divided by bottom quark mass m_b
             * @param s                  dilepton invariant mass divided by squared bottom quark mass m_b
             * @param z                  squared charm quark mass divided by squared bottom quark mass
-            * @param feynepsilonhat     epsilon prescription divided by bottom quark mass m_b
+            * @param feynepsilonhat     epsilon prescription divided by bottom quark mass m_b squared
             *
             */
 
             CharmLoopsParameters(const double & muhat, const complex<double> & s, const double & z, const double & feynepsilonhat);
         };
+
+        // Counterterms
+        complex<double> f17ctQs(const CharmLoopsParameters & );
+        complex<double> f17ctQc(const CharmLoopsParameters & );
+        complex<double> f17ctQb(const CharmLoopsParameters & clp);
+        complex<double> f19ctQs(const CharmLoopsParameters & clp);
+        complex<double> f19ctQc(const CharmLoopsParameters & clp);
+        complex<double> f19ctQb(const CharmLoopsParameters & clp);
+        complex<double> f27ctQs(const CharmLoopsParameters & );
+        complex<double> f27ctQc(const CharmLoopsParameters & );
+        complex<double> f27ctQb(const CharmLoopsParameters & clp);
+        complex<double> f29ctQs(const CharmLoopsParameters & clp);
+        complex<double> f29ctQc(const CharmLoopsParameters & clp);
+        complex<double> f29ctQb(const CharmLoopsParameters & clp);
+
+        // Two-loop functions
+        complex<double> f17c(const CharmLoopsParameters & clp);
+        complex<double> f19c(const CharmLoopsParameters & clp);
+        complex<double> f27c(const CharmLoopsParameters & clp);
+        complex<double> f29c(const CharmLoopsParameters & clp);
+
+        complex<double> f17e(const CharmLoopsParameters & );
+        complex<double> f19e(const CharmLoopsParameters & clp);
+        complex<double> f27e(const CharmLoopsParameters & );
+        complex<double> f29e(const CharmLoopsParameters & clp);
     }
 }
 
