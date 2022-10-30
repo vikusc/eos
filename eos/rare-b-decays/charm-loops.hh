@@ -187,25 +187,25 @@ namespace eos
         complex<double> f29ctQb(const CharmLoopsParameters & clp);
 
         // Two-loop functions
-        complex<double> f17a(const CharmLoopsParameters & clp);
-        complex<double> f19a(const CharmLoopsParameters & clp);
-        complex<double> f27a(const CharmLoopsParameters & clp);
-        complex<double> f29a(const CharmLoopsParameters & clp);
+        // complex<double> f17a(const CharmLoopsParameters & clp);
+        // complex<double> f19a(const CharmLoopsParameters & clp);
+        // complex<double> f27a(const CharmLoopsParameters & clp);
+        // complex<double> f29a(const CharmLoopsParameters & clp);
 
-        complex<double> f17b(const CharmLoopsParameters & clp);
-        //complex<double> f19b(const CharmLoopsParameters & clp);
-        complex<double> f27b(const CharmLoopsParameters & clp);
-        //complex<double> f29b(const CharmLoopsParameters & clp);
+        // complex<double> f17b(const CharmLoopsParameters & clp);
+        // complex<double> f19b(const CharmLoopsParameters & clp);
+        // complex<double> f27b(const CharmLoopsParameters & clp);
+        // complex<double> f29b(const CharmLoopsParameters & clp);
 
-        complex<double> f17c(const CharmLoopsParameters & clp);
-        complex<double> f19c(const CharmLoopsParameters & clp);
-        complex<double> f27c(const CharmLoopsParameters & clp);
-        complex<double> f29c(const CharmLoopsParameters & clp);
+        // complex<double> f17c(const CharmLoopsParameters & clp);
+        // complex<double> f19c(const CharmLoopsParameters & clp);
+        // complex<double> f27c(const CharmLoopsParameters & clp);
+        // complex<double> f29c(const CharmLoopsParameters & clp);
 
         //complex<double> f17d(const CharmLoopsParameters & clp);
         //complex<double> f19d(const CharmLoopsParameters & clp);
         //complex<double> f27d(const CharmLoopsParameters & clp);
-        //complex<double> f29d(const CharmLoopsParameters & clp);
+        complex<double> f29d(const CharmLoopsParameters & clp);
 
         complex<double> f17e(const CharmLoopsParameters & );
         complex<double> f19e(const CharmLoopsParameters & clp);
