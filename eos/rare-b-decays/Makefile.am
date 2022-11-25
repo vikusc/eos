@@ -30,6 +30,9 @@ libeosrarebdecays_la_SOURCES = \
 	bs-to-phi-ll-gvdv2020.cc bs-to-phi-ll-gvdv2020.hh \
 	charm-loops.cc charm-loops.hh \
 	charm-loops-analytic.cc \
+    charm-loops-analytic-weight4.cc \
+    charm-loops-analytic-F27d.cc \
+    charm-loops-analytic-F29d.cc \
 	decays.hh \
 	em-contributions.hh em-contributions.cc \
 	inclusive-b-to-s-dilepton.cc inclusive-b-to-s-dilepton.hh \

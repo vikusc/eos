@@ -22,6 +22,7 @@
 
 #include <eos/maths/complex.hh>
 #include <eos/maths/interpolation.hh>
+#include <eos/maths/power-of.hh>
 #include <eos/models/model.hh>
 
 #include <vector>
@@ -138,6 +139,29 @@ namespace eos
 
     namespace agv_2019a
     {
+        // Often used constants
+
+        static const constexpr complex<double> myi = 1.0i;
+        static const double lnhalf  = - 0.693147180559945309;
+        static const complex<double> lnmhalf = - 0.693147180559945309 + M_PI * 1.0i;
+        static const complex<double> lnm1 = M_PI * 1.0i;
+        static const complex<double> lnm2 = 0.693147180559945309 + M_PI * 1.0i;
+        static const double ln2     = 0.693147180559945309;
+        static const double ln4     = 2.0 * ln2;
+        static const double ln64    = 6.0 * ln2;
+        static const double ln256   = 8.0 * ln2;
+        static const double ln2squ  = power_of<2>(ln2);
+        static const double ln2cube = power_of<3>(ln2);
+        static const constexpr double pisqu   = power_of<2>(M_PI);
+        static const constexpr double li2half = 0.5822405264650124; // dilog(0.5)
+        static const constexpr double li3half = 0.5372131936080402; // trilog(0.5)
+        static const constexpr double zeta3   = 1.2020569031595943;
+        static const double wx3 = 2.0 + std::sqrt(3.0);
+        static const double wx4 = 2.0 - std::sqrt(3.0);
+        static const double wx4squ = wx4 * wx4;
+        static const double wx3inv = wx4;
+        static const double wx4inv = wx3;
+
         struct CharmLoopsParameters
         {
             double muhat;
@@ -172,6 +196,15 @@ namespace eos
             CharmLoopsParameters(const double & muhat, const complex<double> & s, const double & z, const double & feynepsilonhat);
         };
 
+        // Helper functions
+        double my_sign(const double & x);
+        double my_HT(const double & x);
+        double T(const complex<double> & a, const complex<double> & b, const complex<double> & x);
+        complex<double> p(const complex<double> & x1, const complex<double> & x2);
+        double r(const complex<double> & a, const complex<double> & b);
+        double H1(const complex<double> & a, const complex<double> & b);
+        double H2(const complex<double> & a, const complex<double> & b);
+
         // Counterterms
         complex<double> f17ctQs(const CharmLoopsParameters & );
         complex<double> f17ctQc(const CharmLoopsParameters & );
@@ -202,12 +235,12 @@ namespace eos
         complex<double> f27c(const CharmLoopsParameters & clp);
         complex<double> f29c(const CharmLoopsParameters & clp);
 
-        //complex<double> f17d(const CharmLoopsParameters & clp);
-        //complex<double> f19d(const CharmLoopsParameters & clp);
-        //complex<double> f27d(const CharmLoopsParameters & clp);
-        //complex<double> f29d(const CharmLoopsParameters & clp);
+        complex<double> GPLweight4Parts(const CharmLoopsParameters & clp);
 
-        //complex<double> GPLweight4Parts(const CharmLoopsParameters & clp);
+        complex<double> f17d(const CharmLoopsParameters & clp);
+        complex<double> f19d(const CharmLoopsParameters & clp);
+        complex<double> f27d(const CharmLoopsParameters & clp);
+        complex<double> f29d(const CharmLoopsParameters & clp);
 
         complex<double> f17e(const CharmLoopsParameters & );
         complex<double> f19e(const CharmLoopsParameters & clp);
