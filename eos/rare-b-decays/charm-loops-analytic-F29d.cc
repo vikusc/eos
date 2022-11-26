@@ -23,7 +23,7 @@
 #include <eos/maths/polylog.hh>
 #include <eos/maths/multiplepolylog-li22.hh>
 
-#include <eos/rare-b-decays/charm-loops.hh>
+#include <eos/rare-b-decays/charm-loops-impl.hh>
 
 #include <eos/utils/exception.hh>
 #include <eos/utils/log.hh>
@@ -46,7 +46,7 @@ namespace eos
             return - f29d(clp) / (6.0);
         }
 
-                complex<double> f29d(const CharmLoopsParameters & clp)
+        complex<double> f29d(const CharmLoopsParameters & clp)
         {
             const double lnmuhat = log(clp.muhat);
             const complex<double> xd = clp.x_d;

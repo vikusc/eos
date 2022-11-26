@@ -29,7 +29,7 @@ libeosrarebdecays_la_SOURCES = \
 	bs-to-phi-ll-bfs2004.cc bs-to-phi-ll-bfs2004.hh \
 	bs-to-phi-ll-gvdv2020.cc bs-to-phi-ll-gvdv2020.hh \
 	charm-loops.cc charm-loops.hh \
-	charm-loops-analytic.cc \
+	charm-loops-analytic.cc charm-loops-impl.hh \
     charm-loops-analytic-weight4.cc \
     charm-loops-analytic-F27d.cc \
     charm-loops-analytic-F29d.cc \

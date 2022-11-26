@@ -18,7 +18,7 @@
  */
 
 #include <test/test.hh>
-#include <eos/rare-b-decays/charm-loops.hh>
+#include <eos/rare-b-decays/charm-loops-impl.hh>
 
 #include <cmath>
 
