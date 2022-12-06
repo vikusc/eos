@@ -210,8 +210,8 @@ class TwoLoopTest :
                     TEST_CHECK_NEARLY_EQUAL(f29a_ref[i].real(), f29a_res.real(), eps);
                     TEST_CHECK_NEARLY_EQUAL(f29a_ref[i].imag(), f29a_res.imag(), eps);
 
-                    TEST_CHECK_NEARLY_EQUAL(f27b_ref[i].real(), f27b_res.real(), 12*eps);
-                    TEST_CHECK_NEARLY_EQUAL(f27b_ref[i].imag(), f27b_res.imag(), 12*eps);
+                    TEST_CHECK_NEARLY_EQUAL(f27b_ref[i].real(), f27b_res.real(), 15*eps);
+                    TEST_CHECK_NEARLY_EQUAL(f27b_ref[i].imag(), f27b_res.imag(), 15*eps);
 
                     TEST_CHECK_NEARLY_EQUAL(f29b_ref[i].real(), f29b_res.real(), 30*eps);
                     TEST_CHECK_NEARLY_EQUAL(f29b_ref[i].imag(), f29b_res.imag(), 30*eps);
@@ -225,8 +225,8 @@ class TwoLoopTest :
                     TEST_CHECK_NEARLY_EQUAL(f27d_ref[i].real(), f27d_res.real(), 190*eps);
                     TEST_CHECK_NEARLY_EQUAL(f27d_ref[i].imag(), f27d_res.imag(), 190*eps);
 
-                    TEST_CHECK_NEARLY_EQUAL(f29d_ref[i].real(), f29d_res.real(), 1161*eps);
-                    TEST_CHECK_NEARLY_EQUAL(f29d_ref[i].imag(), f29d_res.imag(), 1161*eps);
+                    TEST_CHECK_NEARLY_EQUAL(f29d_ref[i].real(), f29d_res.real(), 1176*eps);
+                    TEST_CHECK_NEARLY_EQUAL(f29d_ref[i].imag(), f29d_res.imag(), 1176*eps);
 
                     TEST_CHECK_NEARLY_EQUAL(f29e_ref[i].real(), f29e_res.real(), eps);
                     TEST_CHECK_NEARLY_EQUAL(f29e_ref[i].imag(), f29e_res.imag(), eps);

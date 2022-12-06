@@ -31,6 +31,8 @@ libeosrarebdecays_la_SOURCES = \
 	charm-loops.cc charm-loops.hh \
 	charm-loops-analytic.cc charm-loops-impl.hh \
     charm-loops-analytic-weight4.cc \
+	charm-loops-analytic-weight4wx3wx4.cc \
+	charm-loops-analytic-weight4w4w5w7.cc \
     charm-loops-analytic-F27d.cc \
     charm-loops-analytic-F29d.cc \
 	decays.hh \
