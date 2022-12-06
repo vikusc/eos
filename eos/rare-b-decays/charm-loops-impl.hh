@@ -33,7 +33,6 @@ namespace eos
     {
         // Often used constants
 
-        static const constexpr complex<double> myi = 1.0i;
         static const double lnhalf  = - 0.693147180559945309;
         static const complex<double> lnmhalf = - 0.693147180559945309 + M_PI * 1.0i;
         static const complex<double> lnm1 = M_PI * 1.0i;
@@ -62,18 +61,18 @@ namespace eos
             complex<double> z_eps; // charm quark mass divided by bottom quark mass, squared, including the epsilon prescription: (m_c^2 - i * epsilon) / (m_b^2 - i * eps)
 
             // only quark mass dependend variables, cf. [AGV:2019A] p. 15 eq. (3.20)
-            complex<double> x_a;
-            complex<double> x_b;
-            complex<double> x_c;
-            complex<double> x_d;
-            complex<double> x_e;
+            complex<double> xa;
+            complex<double> xb;
+            complex<double> xc;
+            complex<double> xd;
+            complex<double> xe;
 
             // q^2 and quark mass dependend variables, cf. [AGV:2019A] p. 15 eq. (3.20)
-            complex<double> y_a;
-            complex<double> y_b;
-            complex<double> y_c;
-            complex<double> y_d;
-            complex<double> y_e;
+            complex<double> ya;
+            complex<double> yb;
+            complex<double> yc;
+            complex<double> yd;
+            complex<double> ye;
 
             /*!
             * Input parameters
@@ -260,6 +259,11 @@ namespace eos
                 }
             }
         }
+
+        // LO functions
+
+        complex<double> f190(const CharmLoopsParameters & clp);
+        complex<double> f290(const CharmLoopsParameters & clp);
 
         // Counterterms
 
