@@ -191,16 +191,26 @@ namespace eos
                 make_form_factor_adapter("B->K::F_plus(q2)", R"(F_+^{B\to K}(q^2))",
                         &FormFactors<PToP>::f_p, std::make_tuple("q2")),
 
+                make_form_factor_adapter("B->K::re_F_plus(Re(q2),Im(q2))", R"()",
+                        &FormFactors<PToP>::re_cartesian_f_p, std::make_tuple("q2_real", "q2_imag")),
+
+                make_form_factor_adapter("B->K::im_F_plus(Re(q2),Im(q2))", R"()",
+                        &FormFactors<PToP>::im_cartesian_f_p, std::make_tuple("q2_real", "q2_imag")),
+
                 make_form_factor_adapter("B->K::F_plus_T(q2)", R"(F_T^{B\to K}(q^2))",
                         &FormFactors<PToP>::f_plus_T, std::make_tuple("q2")),
 
-                make_expression_observable("B->K::F_T(q2)/F_plus(q2)", R"(F_T(q^2)/F_+(q^2))",
-                        Unit::None(),
-                        R"( <<B->K::f_T(q2)>> / <<B->K::F_plus(q2)>> )"),
+                make_form_factor_adapter("B->K::re_F_plus_T(Re(q2),Im(q2))", R"()",
+                        &FormFactors<PToP>::re_cartesian_f_plus_T, std::make_tuple("q2_real", "q2_imag")),
 
-                make_expression_observable("B->K::F_plus_T(q2)/F_plus(q2)", R"(F_{+,T}(q^2)/F_+(q^2))",
-                        Unit::None(),
-                        R"( <<B->K::F_plus_T(q2)>> / <<B->K::F_plus(q2)>> )"),
+                make_form_factor_adapter("B->K::im_F_plus_T(Re(q2),Im(q2))", R"()",
+                        &FormFactors<PToP>::im_cartesian_f_plus_T, std::make_tuple("q2_real", "q2_imag")),
+
+                make_form_factor_adapter("B->K::re_F_plus_ratio(Re(q2),Im(q2))", R"()",
+                        &FormFactors<PToP>::re_cartesian_f_plus_ratio, std::make_tuple("q2_real", "q2_imag")),
+
+                make_form_factor_adapter("B->K::im_F_plus_ratio(Re(q2),Im(q2))", R"()",
+                        &FormFactors<PToP>::im_cartesian_f_plus_ratio, std::make_tuple("q2_real", "q2_imag")),
             }
         );
 

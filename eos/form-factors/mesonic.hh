@@ -204,6 +204,13 @@ namespace eos
             virtual complex<double> f_p(const complex<double> & q2) const;
             virtual complex<double> f_0(const complex<double> & q2) const;
             virtual complex<double> f_t(const complex<double> & q2) const;
+            virtual complex<double> f_plus_T(const complex<double> & q2) const;
+            virtual double re_cartesian_f_p(const double &, const double &) const;
+            virtual double im_cartesian_f_p(const double &, const double &) const;
+            virtual double re_cartesian_f_plus_T(const double &, const double &) const;
+            virtual double im_cartesian_f_plus_T(const double &, const double &) const;
+            virtual double re_cartesian_f_plus_ratio(const double &, const double &) const;
+            virtual double im_cartesian_f_plus_ratio(const double &, const double &) const;
 
     };
 

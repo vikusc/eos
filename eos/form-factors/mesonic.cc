@@ -355,6 +355,50 @@ namespace eos
     }
 
     complex<double>
+    FormFactors<PToP>::f_plus_T(const complex<double> &) const
+    {
+        throw InternalError("P->P form factor f_plus_T for complex q2 is not implemented for this parametrisation");
+        return complex<double>(std::numeric_limits<double>::signaling_NaN());
+    }
+
+    double
+    FormFactors<PToP>::re_cartesian_f_p(const double & re_q2, const double & im_q2) const
+    {
+        return real(f_p(complex<double>(re_q2, im_q2)));
+    }
+
+    double
+    FormFactors<PToP>::im_cartesian_f_p(const double & re_q2, const double & im_q2) const
+    {
+        return imag(f_p(complex<double>(re_q2, im_q2)));
+    }
+
+    double
+    FormFactors<PToP>::re_cartesian_f_plus_T(const double & re_q2, const double & im_q2) const
+    {
+        return real(f_plus_T(complex<double>(re_q2, im_q2)));
+    }
+
+    double
+    FormFactors<PToP>::im_cartesian_f_plus_T(const double & re_q2, const double & im_q2) const
+    {
+        return imag(f_plus_T(complex<double>(re_q2, im_q2)));
+    }
+
+    double
+    FormFactors<PToP>::re_cartesian_f_plus_ratio(const double & re_q2, const double & im_q2) const
+    {
+        return real(f_plus_T(complex<double>(re_q2, im_q2)) / f_p(complex<double>(re_q2, im_q2)));
+    }
+
+    double
+    FormFactors<PToP>::im_cartesian_f_plus_ratio(const double & re_q2, const double & im_q2) const
+    {
+        return imag(f_plus_T(complex<double>(re_q2, im_q2)) / f_p(complex<double>(re_q2, im_q2)));
+    }
+
+
+    complex<double>
     FormFactors<PToP>::f_0(const complex<double> &) const
     {
         throw InternalError("P->P form factor f_0 for complex q2 is not implemented for this parametrisation");
