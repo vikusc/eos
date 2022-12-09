@@ -4601,7 +4601,7 @@ groups:
           latex:   '$\mathrm{%1%}\, \hat{\mathcal{H}}_\%3%^{B\to Kc\bar{c}}(%2%)$'
           matrix:
               - [ "Re", "Im" ]
-              - [ "m7", "m5", "m3", "m1", "t0" ]
+              - [ "m7", "m5", "m3", "m1", "t0", "s0", "s1", "s2", "s3" ]
               - [ "plus" ]
       'B->Kccbar::A%1%_Hhat_at_%2%_%3%@GRvDV2022' :
           central: 0
