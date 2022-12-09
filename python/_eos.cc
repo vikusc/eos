@@ -38,6 +38,8 @@
 #include "eos/statistics/log-prior.hh"
 #include "eos/statistics/test-statistic-impl.hh"
 
+#include "eos/rare-b-decays/charm-loops-impl.hh"
+
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 
@@ -225,12 +227,12 @@ BOOST_PYTHON_MODULE(_eos)
     docstring_options local_docstring_options(true, true, false);
 
     // eos::Exception
-    register_exception_translator<Exception>(&impl::translate_exception);
+    register_exception_translator<Exception>(&::impl::translate_exception);
 
     // native eos logging: provide functions and enum type
-    def("_register_log_callback", &impl::register_log_callback);
-    def("_emit_native_log", &impl::emit_native_log);
-    def("_set_native_log_level", &impl::set_native_log_level);
+    def("_register_log_callback", &::impl::register_log_callback);
+    def("_emit_native_log", &::impl::emit_native_log);
+    def("_set_native_log_level", &::impl::set_native_log_level);
     enum_<LogLevel>("_NativeLogLevel")
         .value("SILENT",  ll_silent)
         .value("ERROR",   ll_error)
@@ -383,7 +385,7 @@ BOOST_PYTHON_MODULE(_eos)
                k = eos.Kinematics({'q2': 0.4, 'cos(theta_l)': -1.0})   # use a dictionary if variable names are not
                                                                        # valid python identifiers
         )", no_init)
-        .def("__init__", raw_function(&impl::Kinematics_ctor))
+        .def("__init__", raw_function(&::impl::Kinematics_ctor))
         .def(init<>())
         .def("__add__", &Kinematics::operator+)
         .def("__iter__", range(&Kinematics::begin, &Kinematics::end))
@@ -408,7 +410,7 @@ BOOST_PYTHON_MODULE(_eos)
         ;
 
     // Options
-    impl::std_pair_to_python_converter<const std::string, std::string> converter_options_iter;
+    ::impl::std_pair_to_python_converter<const std::string, std::string> converter_options_iter;
     class_<Options>("Options", R"(
             Represents the set of options provided to an observable.
 
@@ -422,7 +424,7 @@ BOOST_PYTHON_MODULE(_eos)
                o = eos.Options({'form-factors': 'BSZ2015'})   # use a dictionary if option keys are not
                                                               # valid python identifiers
         )", no_init)
-        .def("__init__", raw_function(&impl::Options_ctor))
+        .def("__init__", raw_function(&::impl::Options_ctor))
         .def("__iter__", range(&Options::begin, &Options::end))
         .def(init<>())
         .def("declare", &Options::declare)
@@ -430,7 +432,7 @@ BOOST_PYTHON_MODULE(_eos)
         ;
 
     // OptionSpecification
-    impl::std_vector_to_python_converter<std::string> converter_option_specifications;
+    ::impl::std_vector_to_python_converter<std::string> converter_option_specifications;
     class_<OptionSpecification>("OptionSpecification")
         .def_readonly("key", &OptionSpecification::key)
         .add_property("allowed_values", make_getter(&OptionSpecification::allowed_values, return_value_policy<return_by_value>()))
@@ -489,7 +491,7 @@ BOOST_PYTHON_MODULE(_eos)
         .def("m_b_kin",    &Model::m_b_kin)
         .def("m_b_msbar",  &Model::m_b_msbar)
         .def("m_b_pole",   &Model::m_b_pole)
-        .def("m_b_pole",   &impl::m_b_pole_wrapper_noargs)
+        .def("m_b_pole",   &::impl::m_b_pole_wrapper_noargs)
         .def("m_c_kin",    &Model::m_c_kin)
         .def("m_c_msbar",  &Model::m_c_msbar)
         .def("m_c_pole",   &Model::m_c_pole)
@@ -555,7 +557,7 @@ BOOST_PYTHON_MODULE(_eos)
         ;
 
     // Constraints
-    impl::std_pair_to_python_converter<const QualifiedName, std::shared_ptr<const ConstraintEntry>> converter_constraints_iter;
+    ::impl::std_pair_to_python_converter<const QualifiedName, std::shared_ptr<const ConstraintEntry>> converter_constraints_iter;
     class_<Constraints>("_Constraints")
         .def("__getitem__", (std::shared_ptr<const ConstraintEntry> (Constraints::*)(const QualifiedName &) const) &Constraints::operator[])
         .def("__iter__", range(&Constraints::begin, &Constraints::end))
@@ -651,7 +653,7 @@ BOOST_PYTHON_MODULE(_eos)
         ;
 
     // GoodnessOfFit
-    impl::std_pair_to_python_converter<const QualifiedName, test_statistics::ChiSquare> converter_goodnessoffit_chi_square_iter;
+    ::impl::std_pair_to_python_converter<const QualifiedName, test_statistics::ChiSquare> converter_goodnessoffit_chi_square_iter;
     class_<GoodnessOfFit>("GoodnessOfFit", R"(
             Represents the goodness of fit characteristics of the log(posterior).
         )", init<LogPosterior>())
@@ -680,7 +682,7 @@ BOOST_PYTHON_MODULE(_eos)
         ;
 
     // References
-    impl::std_pair_to_python_converter<const ReferenceName, ReferencePtr> converter_references_iter;
+    ::impl::std_pair_to_python_converter<const ReferenceName, ReferencePtr> converter_references_iter;
     class_<References>("_References")
         .def("__getitem__", &References::operator[])
         .def("__iter__", range(&References::begin, &References::end))
@@ -763,7 +765,7 @@ BOOST_PYTHON_MODULE(_eos)
         ;
 
     // Observables
-    impl::std_pair_to_python_converter<const QualifiedName, ObservableEntryPtr> converter_observables_iter;
+    ::impl::std_pair_to_python_converter<const QualifiedName, ObservableEntryPtr> converter_observables_iter;
     class_<Observables>("_Observables")
         .def("__getitem__", &Observables::operator[])
         .def("__iter__", range(&Observables::begin, &Observables::end))
@@ -830,7 +832,7 @@ BOOST_PYTHON_MODULE(_eos)
         ;
 
     // SignalPDFs
-    impl::std_pair_to_python_converter<const QualifiedName, std::shared_ptr<SignalPDFEntry>> converter_signalpdfs_iter;
+    ::impl::std_pair_to_python_converter<const QualifiedName, std::shared_ptr<SignalPDFEntry>> converter_signalpdfs_iter;
     class_<SignalPDFs>("_SignalPDFs")
         .def("__iter__", range(&SignalPDFs::begin, &SignalPDFs::end))
         ;
@@ -839,4 +841,8 @@ BOOST_PYTHON_MODULE(_eos)
 
     // EOS version
     scope().attr("__version__") = PACKAGE_VERSION;
+
+    // Analytic modification of C_7 and C_9 at NLO
+    def("delta_c7", &agv_2019a::delta_c7);
+    def("delta_c9", &agv_2019a::delta_c9);
 }
