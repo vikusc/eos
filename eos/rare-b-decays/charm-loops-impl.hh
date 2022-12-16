@@ -320,7 +320,9 @@ namespace eos
         complex<double> F27_Qsb(const CharmLoopsParameters & clp);
         complex<double> F29_Qsb(const CharmLoopsParameters & clp);
 
+        complex<double> delta_c7_Qc(const complex<double> & s, const double & mu, const double & alpha_s, const double & m_c, const double & m_b, const WilsonCoefficients<BToS> & wc);
         complex<double> delta_c7(const complex<double> & s, const double & mu, const double & alpha_s, const double & m_c, const double & m_b, const WilsonCoefficients<BToS> & wc);
+        complex<double> delta_c9_Qc(const complex<double> & s, const double & mu, const double & alpha_s, const double & m_c, const double & m_b, const WilsonCoefficients<BToS> & wc);
         complex<double> delta_c9(const complex<double> & s, const double & mu, const double & alpha_s, const double & m_c, const double & m_b, const WilsonCoefficients<BToS> & wc);
     }
 }

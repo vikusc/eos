@@ -1383,6 +1383,26 @@ namespace eos
     }
 
     complex<double>
+    agv_2019a::delta_c7_Qc(const complex<double> & s, const double & mu, const double & alpha_s, const double & m_c, const double & m_b, const WilsonCoefficients<BToS> & wc)
+    {
+        const agv_2019a::CharmLoopsParameters clp = {/*muhat =*/ mu / m_b, /*s =*/ s, /*z =*/ (m_c * m_c) / (m_b * m_b), /*feynepsilonhat*/ 1e-12};
+
+        // cf. [AGV:2019A] Eq. (2.11), p. 6, and Eq. (2.21), p. 7
+        complex<double> result;
+
+        // LO contribution
+        result += 0;
+
+        // NLO contribution
+        complex<double> nlo = -1.0 * (
+              wc.c1() * agv_2019a::F17_Qc(clp)
+            + wc.c2() * agv_2019a::F27_Qc(clp));
+        result += (alpha_s / (4.0 * M_PI)) * nlo;
+
+        return result;
+    }
+
+    complex<double>
     agv_2019a::delta_c7(const complex<double> & s, const double & mu, const double & alpha_s, const double & m_c, const double & m_b, const WilsonCoefficients<BToS> & wc)
     {
         const agv_2019a::CharmLoopsParameters clp = {/*muhat =*/ mu / m_b, /*s =*/ s, /*z =*/ (m_c * m_c) / (m_b * m_b), /*feynepsilonhat*/ 1e-12};
@@ -1397,6 +1417,26 @@ namespace eos
         complex<double> nlo = -1.0 * (
               wc.c1() * (agv_2019a::F17_Qc(clp) + agv_2019a::F17_Qsb(clp))
             + wc.c2() * (agv_2019a::F27_Qc(clp) + agv_2019a::F27_Qsb(clp)));
+        result += (alpha_s / (4.0 * M_PI)) * nlo;
+
+        return result;
+    }
+
+    complex<double>
+    agv_2019a::delta_c9_Qc(const complex<double> & s, const double & mu, const double & alpha_s, const double & m_c, const double & m_b, const WilsonCoefficients<BToS> & wc)
+    {
+        const agv_2019a::CharmLoopsParameters clp(mu / m_b, s, (m_c * m_c) / (m_b * m_b), 1e-12);
+
+        // cf. [AGV:2019A] Eq. (2.11), p. 6, and Eq. (2.21), p. 7
+        complex<double> result;
+
+        // LO contribution cf. [AGV:2019A] p. 31
+        result += wc.c1() * agv_2019a::f190(clp) + wc.c2() * agv_2019a::f290(clp);
+
+        complex<double> nlo = -1.0 * (
+              wc.c1() * agv_2019a::F19_Qc(clp)
+            + wc.c2() * agv_2019a::F29_Qc(clp));
+
         result += (alpha_s / (4.0 * M_PI)) * nlo;
 
         return result;
