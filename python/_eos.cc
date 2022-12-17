@@ -470,6 +470,12 @@ BOOST_PYTHON_MODULE(_eos)
         .def("__eq__", &Unit::operator==)
         ;
 
+    // WilsonCoefficients
+    class_<WilsonCoefficients<eos::BToS>>("BToSWilsonCoefficients", no_init)
+        .def("c1", &WilsonCoefficients<eos::BToS>::c1)
+        .def("c2", &WilsonCoefficients<eos::BToS>::c2)
+        ;
+
     // Model
     register_ptr_to_python<std::shared_ptr<Model>>();
     class_<Model, boost::noncopyable>("Model", no_init)
@@ -497,6 +503,10 @@ BOOST_PYTHON_MODULE(_eos)
         .def("m_c_pole",   &Model::m_c_pole)
         .def("m_s_msbar",  &Model::m_s_msbar)
         .def("m_ud_msbar", &Model::m_ud_msbar)
+        // WilsonCoefficients
+        .def("wilson_coefficients_b_to_s", &Model::wilson_coefficients_b_to_s)
+        // alpha_s
+        .def("alpha_s", &Model::alpha_s)
         ;
 
     // ObservableCache
@@ -844,5 +854,7 @@ BOOST_PYTHON_MODULE(_eos)
 
     // Analytic modification of C_7 and C_9 at NLO
     def("delta_c7", &agv_2019a::delta_c7);
+    def("delta_c7_Qc", &agv_2019a::delta_c7_Qc);
     def("delta_c9", &agv_2019a::delta_c9);
+    def("delta_c9_Qc", &agv_2019a::delta_c9_Qc);
 }
